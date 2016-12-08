@@ -1,0 +1,56 @@
+﻿@model BusinessLayer.Usuario      
+
+@{
+    ViewBag.Title = "Registrarse";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Registrarse</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Usuario</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        <div class="form-group">
+            @Html.Label("Nombre", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.userName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.userName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Email", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.userEmail, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.userEmail)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Contraseña", htmlAttributes: new { @class = "control-label col-md-2" , })
+            <div class="col-md-10">
+                @Html.PasswordFor(model => model.userPassword, new { @class = "form-control"})
+                @Html.ValidationMessageFor(model => model.userPassword)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Tipo de Usuario", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(x => x.userTypeId, (IEnumerable<SelectListItem>)ViewBag.tipo_id, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.userTypeId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Registrarse" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+}

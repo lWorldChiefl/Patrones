@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.AntiForgeryToken()
+
+<h2>Index</h2>
+
+@section Scripts {
+    <script type="text/javaScript">
+    var testVar = "test";
+    $(document).ready(function () {
+        var ulEmployees = $('#ulEmployees');
+        $.ajax({
+            type: 'GET',
+            url: "http://localhost:80/Api/Veroco/",
+            dataType: 'json',
+            success: function (data) {
+                ulEmployees.empty();
+                $.each(data, function (index, val) {
+                    var productName = val.productName;
+                    var productPrice = val.productPrice;
+                    var productStock = val.productPrice;
+                    var productImage = val.productImage.substring(1);
+                    ulEmployees.append('<li><img src="' + productImage + '" style="height:200px;width:200px alt" ' + productName + ' ' + productPrice + ' ' + productStock + ' ' + productImage + '">              ' + productName + ' ' + productPrice + ' ' + productStock + '</li>');
+                });
+            }
+        });
+    });
+</script>
+
+}
+
+
+
+<div class="container">
+    <h2 class="text-center">Productos</h2>
+    <div class="Wrapper">
+        <ul id="ulEmployees">
+    </div>
+</div>

@@ -1,0 +1,33 @@
+﻿* {
+  box-sizing: border-box;
+}
+
+.background-image {
+  background-image :url("image/image.jpg");
+  background-size:cover;
+  display: block;
+  filter: blur(2px);
+  -webkit-filter: blur(1px);
+  height: 800px;
+  left: 0;
+  position: fixed;
+  right: 0;
+  z-index: 1;
+  top: 0;
+}
+
+.content {
+    background: rgb(255, 255, 255);
+  border-radius: 3px;
+  box-shadow: 0 1px 5px rgba(32, 99, 228, 0.26);
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  top: 10;
+  left: 0;
+  position: fixed;
+  margin-left: 40px;
+  margin-right: 40px;
+  right: 0;
+  z-index: 2;
+  padding: 0 10px;
+  text-align: center;
+}

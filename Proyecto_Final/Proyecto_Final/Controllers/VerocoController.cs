@@ -53,7 +53,13 @@ namespace Proyecto_Final.Controllers
 
         public ActionResult Registrarse()
         {
-            ViewBag.tipo_id = new SelectList(db.Tipos_Usuarios, "userTypeId", "userTypeDescription",1);
+            var x = db.Tipos_Usuarios.ToList().Select(c => new SelectListItem         
+                            {
+                               Text = c.userTypeDescription,
+                               Value = c.userTypeId.ToString(),
+                               Selected = (c.userTypeId == 1)
+                            }).ToList();
+            ViewBag.tipo_id = x;
             return View();
         }
 

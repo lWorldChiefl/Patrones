@@ -18,10 +18,10 @@ namespace BusinessLayer
         {
             this.Usuarios = new HashSet<Usuario>();
         }
-    
+
         public int userTypeId { get; set; }
         public string userTypeDescription { get; set; }
     
-        public virtual ICollection<Usuario> Usuarios { get; set; }
+        public ICollection<Usuario> Usuarios { get; set; }
     }
 }

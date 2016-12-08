@@ -25,6 +25,7 @@ namespace Proyecto_Final.Controllers
 
         public ActionResult Crear()
         {
+            ViewBag.tipo_Categoria = new SelectList(db.Categorias, "categoryId", "categoryName", 1);
             return View();
         }
 
@@ -45,21 +46,22 @@ namespace Proyecto_Final.Controllers
                 var fileName = Path.GetFileName(ImagenCompleta.Imagen.ImageUpload.FileName);
                 var path = Path.Combine(Server.MapPath("~/Content/image"), fileName);
                 ImagenCompleta.Imagen.ImageUpload.SaveAs(path);
-                ImagenCompleta.Producto.productImage = "~/Content/image/" + fileName;
+                ImagenCompleta.Producto.proyectImage = "~/Content/image/" + fileName;
             }
 
-            db.Productos.Add(ImagenCompleta.Producto);
+            db.Proyectos.Add(ImagenCompleta.Producto);
             db.SaveChanges();
             return RedirectToAction("Productos");
         }
 
         public ActionResult Editar(int? id)
         {
+            ViewBag.tipo_Categoria = new SelectList(db.Categorias, "categoryId", "categoryName", 1);
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Producto producto = db.Productos.Find(id);
+            Proyecto producto = db.Proyectos.Find(id);
             if (producto == null)
             {
                 return HttpNotFound();
@@ -68,7 +70,7 @@ namespace Proyecto_Final.Controllers
         }
 
         [HttpPost]
-        public ActionResult Editar(Producto producto)
+        public ActionResult Editar(Proyecto producto)
         {
             if (ModelState.IsValid)
             {
@@ -84,7 +86,7 @@ namespace Proyecto_Final.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Producto producto = db.Productos.Find(id);
+            Proyecto producto = db.Proyectos.Find(id);
             if (producto == null)
             {
                 return HttpNotFound();
@@ -95,7 +97,7 @@ namespace Proyecto_Final.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult Eliminar(int id)
         {
-            Producto producto = db.Productos.Find(id);
+            Proyecto producto = db.Proyectos.Find(id);
             proRe.Eliminar(producto);
             return RedirectToAction("Productos");
         }

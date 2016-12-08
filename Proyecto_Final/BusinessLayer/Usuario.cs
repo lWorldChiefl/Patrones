@@ -11,26 +11,21 @@ namespace BusinessLayer
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class Usuario
     {
         public Usuario()
         {
-            this.Facturas = new HashSet<Factura>();
+            this.Detalles = new HashSet<Detalle>();
         }
-
-        [Key]
+    
         public int userId { get; set; }
-        [Required(ErrorMessage = "Nombre Invalido")]
         public string userName { get; set; }
-        [Required(ErrorMessage = "Email Invalido")]
         public string userEmail { get; set; }
-        [Required(ErrorMessage = "Password Invalido")]
         public string userPassword { get; set; }
         public Nullable<int> userTypeId { get; set; }
     
-        public virtual ICollection<Factura> Facturas { get; set; }
         public virtual Tipos_Usuarios Tipos_Usuarios { get; set; }
+        public virtual ICollection<Detalle> Detalles { get; set; }
     }
 }

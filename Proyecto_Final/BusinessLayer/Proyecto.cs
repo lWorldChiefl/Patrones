@@ -11,25 +11,20 @@ namespace BusinessLayer
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
-    public partial class Producto
+    public partial class Proyecto
     {
-        public Producto()
+        public Proyecto()
         {
             this.Detalles = new HashSet<Detalle>();
         }
-
-        [Key]
-        public int productId { get; set; }
-        [Required(ErrorMessage = "Nombre Invalido")]
-        public string productName { get; set; }
-        [Required(ErrorMessage = "Precio Invalido")]
-        public Nullable<int> productPrice { get; set; }
-        [Required(ErrorMessage = "Stock Invalido")]
-        public Nullable<int> productStock { get; set; }
+    
+        public int proyectId { get; set; }
+        public string proyectName { get; set; }
+        public string proyectDescription { get; set; }
+        public Nullable<int> proyectStock { get; set; }
+        public string proyectImage { get; set; }
         public Nullable<int> categoryId { get; set; }
-        public string productImage { get; set; }
     
         public virtual Categoria Categoria { get; set; }
         public virtual ICollection<Detalle> Detalles { get; set; }

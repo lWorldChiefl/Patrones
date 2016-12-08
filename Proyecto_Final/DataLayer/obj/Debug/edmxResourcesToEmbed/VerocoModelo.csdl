@@ -7,7 +7,7 @@
     <Property Name="categoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="categoryName" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
     <Property Name="categoryDescription" Type="String" MaxLength="180" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Productos" Relationship="Self.FK__Productos__categ__173876EA" FromRole="Categorias" ToRole="Productos" />
+    <NavigationProperty Name="Proyectos" Relationship="Proyecto_VerocoModel.FK__Proyectos__categ__173876EA" FromRole="Categoria" ToRole="Proyecto" />
   </EntityType>
   <EntityType Name="Detalle">
     <Key>
@@ -17,32 +17,10 @@
     <Property Name="productId" Type="Int32" />
     <Property Name="detailsQuantity" Type="Int32" />
     <Property Name="detailsPrice" Type="Int32" />
-    <NavigationProperty Name="Producto" Relationship="Self.FK__Detalles__detail__1A14E395" FromRole="Detalles" ToRole="Productos" />
-    <NavigationProperty Name="Facturas" Relationship="Self.FK__Facturas__detail__1DE57479" FromRole="Detalles" ToRole="Facturas" />
-  </EntityType>
-  <EntityType Name="Factura">
-    <Key>
-      <PropertyRef Name="invoiceId" />
-    </Key>
-    <Property Name="invoiceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="invoiceDate" Type="DateTime" Precision="0" />
-    <Property Name="detailsId" Type="Int32" />
+    <Property Name="proyectId" Type="Int32" />
     <Property Name="userId" Type="Int32" />
-    <NavigationProperty Name="Detalle" Relationship="Self.FK__Facturas__detail__1DE57479" FromRole="Facturas" ToRole="Detalles" />
-    <NavigationProperty Name="Usuario" Relationship="Self.FK__Facturas__userId__1CF15040" FromRole="Facturas" ToRole="Usuarios" />
-  </EntityType>
-  <EntityType Name="Producto">
-    <Key>
-      <PropertyRef Name="productId" />
-    </Key>
-    <Property Name="productId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="productName" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-    <Property Name="productPrice" Type="Int32" />
-    <Property Name="productStock" Type="Int32" />
-    <Property Name="categoryId" Type="Int32" />
-    <NavigationProperty Name="Categoria" Relationship="Self.FK__Productos__categ__173876EA" FromRole="Productos" ToRole="Categorias" />
-    <NavigationProperty Name="Detalles" Relationship="Self.FK__Detalles__detail__1A14E395" FromRole="Productos" ToRole="Detalles" />
-    <Property Name="productImage" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Proyecto" Relationship="Proyecto_VerocoModel.FK__Detalles__proyec__1A14E395" FromRole="Detalle" ToRole="Proyecto" />
+    <NavigationProperty Name="Usuario" Relationship="Proyecto_VerocoModel.FK__Detalles__userId__1B0907CE" FromRole="Detalle" ToRole="Usuario" />
   </EntityType>
   <EntityType Name="Tipos_Usuarios">
     <Key>
@@ -61,57 +39,9 @@
     <Property Name="userEmail" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
     <Property Name="userPassword" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
     <Property Name="userTypeId" Type="Int32" />
-    <NavigationProperty Name="Facturas" Relationship="Self.FK__Facturas__userId__1CF15040" FromRole="Usuarios" ToRole="Facturas" />
     <NavigationProperty Name="Tipos_Usuarios" Relationship="Self.FK__Usuarios__userTy__1273C1CD" FromRole="Usuarios" ToRole="Tipos_Usuarios" />
+    <NavigationProperty Name="Detalles" Relationship="Proyecto_VerocoModel.FK__Detalles__userId__1B0907CE" FromRole="Usuario" ToRole="Detalle" />
   </EntityType>
-  <Association Name="FK__Productos__categ__173876EA">
-    <End Role="Categorias" Type="Self.Categoria" Multiplicity="0..1" />
-    <End Role="Productos" Type="Self.Producto" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Categorias">
-        <PropertyRef Name="categoryId" />
-      </Principal>
-      <Dependent Role="Productos">
-        <PropertyRef Name="categoryId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Detalles__detail__1A14E395">
-    <End Role="Productos" Type="Self.Producto" Multiplicity="0..1" />
-    <End Role="Detalles" Type="Self.Detalle" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Productos">
-        <PropertyRef Name="productId" />
-      </Principal>
-      <Dependent Role="Detalles">
-        <PropertyRef Name="productId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Facturas__detail__1DE57479">
-    <End Role="Detalles" Type="Self.Detalle" Multiplicity="0..1" />
-    <End Role="Facturas" Type="Self.Factura" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Detalles">
-        <PropertyRef Name="detailsId" />
-      </Principal>
-      <Dependent Role="Facturas">
-        <PropertyRef Name="detailsId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Facturas__userId__1CF15040">
-    <End Role="Usuarios" Type="Self.Usuario" Multiplicity="0..1" />
-    <End Role="Facturas" Type="Self.Factura" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Usuarios">
-        <PropertyRef Name="userId" />
-      </Principal>
-      <Dependent Role="Facturas">
-        <PropertyRef Name="userId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__Usuarios__userTy__1273C1CD">
     <End Role="Tipos_Usuarios" Type="Self.Tipos_Usuarios" Multiplicity="0..1" />
     <End Role="Usuarios" Type="Self.Usuario" Multiplicity="*" />
@@ -127,29 +57,73 @@
   <EntityContainer Name="Proyecto_VerocoEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Categorias" EntityType="Self.Categoria" />
     <EntitySet Name="Detalles" EntityType="Self.Detalle" />
-    <EntitySet Name="Facturas" EntityType="Self.Factura" />
-    <EntitySet Name="Productos" EntityType="Self.Producto" />
     <EntitySet Name="Tipos_Usuarios" EntityType="Self.Tipos_Usuarios" />
     <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
-    <AssociationSet Name="FK__Productos__categ__173876EA" Association="Self.FK__Productos__categ__173876EA">
-      <End Role="Categorias" EntitySet="Categorias" />
-      <End Role="Productos" EntitySet="Productos" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Detalles__detail__1A14E395" Association="Self.FK__Detalles__detail__1A14E395">
-      <End Role="Productos" EntitySet="Productos" />
-      <End Role="Detalles" EntitySet="Detalles" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Facturas__detail__1DE57479" Association="Self.FK__Facturas__detail__1DE57479">
-      <End Role="Detalles" EntitySet="Detalles" />
-      <End Role="Facturas" EntitySet="Facturas" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Facturas__userId__1CF15040" Association="Self.FK__Facturas__userId__1CF15040">
-      <End Role="Usuarios" EntitySet="Usuarios" />
-      <End Role="Facturas" EntitySet="Facturas" />
-    </AssociationSet>
     <AssociationSet Name="FK__Usuarios__userTy__1273C1CD" Association="Self.FK__Usuarios__userTy__1273C1CD">
       <End Role="Tipos_Usuarios" EntitySet="Tipos_Usuarios" />
       <End Role="Usuarios" EntitySet="Usuarios" />
     </AssociationSet>
+    <EntitySet Name="Proyectos" EntityType="Proyecto_VerocoModel.Proyecto" />
+    <AssociationSet Name="FK__Proyectos__categ__173876EA" Association="Proyecto_VerocoModel.FK__Proyectos__categ__173876EA">
+      <End Role="Categoria" EntitySet="Categorias" />
+      <End Role="Proyecto" EntitySet="Proyectos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Detalles__proyec__1A14E395" Association="Proyecto_VerocoModel.FK__Detalles__proyec__1A14E395">
+      <End Role="Proyecto" EntitySet="Proyectos" />
+      <End Role="Detalle" EntitySet="Detalles" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Detalles__userId__1B0907CE" Association="Proyecto_VerocoModel.FK__Detalles__userId__1B0907CE">
+      <End Role="Usuario" EntitySet="Usuarios" />
+      <End Role="Detalle" EntitySet="Detalles" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Proyecto">
+    <Key>
+      <PropertyRef Name="proyectId" />
+    </Key>
+    <Property Name="proyectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="proyectName" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="proyectDescription" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+    <Property Name="proyectStock" Type="Int32" />
+    <Property Name="proyectImage" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+    <Property Name="categoryId" Type="Int32" />
+    <NavigationProperty Name="Categoria" Relationship="Proyecto_VerocoModel.FK__Proyectos__categ__173876EA" FromRole="Proyecto" ToRole="Categoria" />
+    <NavigationProperty Name="Detalles" Relationship="Proyecto_VerocoModel.FK__Detalles__proyec__1A14E395" FromRole="Proyecto" ToRole="Detalle" />
+  </EntityType>
+  <Association Name="FK__Proyectos__categ__173876EA">
+    <End Type="Proyecto_VerocoModel.Categoria" Role="Categoria" Multiplicity="0..1" />
+    <End Type="Proyecto_VerocoModel.Proyecto" Role="Proyecto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categoria">
+        <PropertyRef Name="categoryId" />
+      </Principal>
+      <Dependent Role="Proyecto">
+        <PropertyRef Name="categoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Detalles__proyec__1A14E395">
+    <End Type="Proyecto_VerocoModel.Proyecto" Role="Proyecto" Multiplicity="0..1" />
+    <End Type="Proyecto_VerocoModel.Detalle" Role="Detalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proyecto">
+        <PropertyRef Name="proyectId" />
+      </Principal>
+      <Dependent Role="Detalle">
+        <PropertyRef Name="proyectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Detalles__userId__1B0907CE">
+    <End Type="Proyecto_VerocoModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+    <End Type="Proyecto_VerocoModel.Detalle" Role="Detalle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="userId" />
+      </Principal>
+      <Dependent Role="Detalle">
+        <PropertyRef Name="userId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

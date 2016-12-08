@@ -11,20 +11,18 @@ namespace BusinessLayer
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class Categoria
     {
         public Categoria()
         {
-            this.Productos = new HashSet<Producto>();
+            this.Proyectos = new HashSet<Proyecto>();
         }
-
-        [Key]
+    
         public int categoryId { get; set; }
         public string categoryName { get; set; }
         public string categoryDescription { get; set; }
     
-        public virtual ICollection<Producto> Productos { get; set; }
+        public virtual ICollection<Proyecto> Proyectos { get; set; }
     }
 }

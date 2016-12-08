@@ -9,10 +9,10 @@
 
 namespace DataLayer
 {
-    using BusinessLayer;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using BusinessLayer;
     
     public partial class Proyecto_VerocoEntities : DbContext
     {
@@ -28,9 +28,8 @@ namespace DataLayer
     
         public virtual DbSet<Categoria> Categorias { get; set; }
         public virtual DbSet<Detalle> Detalles { get; set; }
-        public virtual DbSet<Factura> Facturas { get; set; }
-        public virtual DbSet<Producto> Productos { get; set; }
         public virtual DbSet<Tipos_Usuarios> Tipos_Usuarios { get; set; }
         public virtual DbSet<Usuario> Usuarios { get; set; }
+        public virtual DbSet<Proyecto> Proyectos { get; set; }
     }
 }

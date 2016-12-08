@@ -63,7 +63,7 @@ namespace BusinessLayer
     }
 
 
-    public class ProductosRepository : IRepository<Producto>
+    public class ProductosRepository : IRepository<Proyecto>
     {
 
         Proyecto_VerocoEntities _userContext;
@@ -73,36 +73,36 @@ namespace BusinessLayer
             _userContext = new Proyecto_VerocoEntities();
 
         }
-        public IEnumerable<Producto> Listar
+        public IEnumerable<Proyecto> Listar
         {
             get
             {
-                return _userContext.Productos;
+                return _userContext.Proyectos;
             }
 
         }
 
-        public void Crear(Producto entity)
+        public void Crear(Proyecto entity)
         {
-            _userContext.Productos.Add(entity);
+            _userContext.Proyectos.Add(entity);
             _userContext.SaveChanges();
         }
 
-        public void Eliminar(Producto entity)
+        public void Eliminar(Proyecto entity)
         {
-            _userContext.Productos.Remove(entity);
+            _userContext.Proyectos.Remove(entity);
             _userContext.SaveChanges();
         }
 
-        public void Actualizar(Producto entity)
+        public void Actualizar(Proyecto entity)
         {
             _userContext.Entry(entity).State = System.Data.Entity.EntityState.Modified;
             _userContext.SaveChanges();
         }
 
-        public Producto Buscar(int Id)
+        public Proyecto Buscar(int Id)
         {
-            var result = (from r in _userContext.Productos where r.productId == Id select r).FirstOrDefault();
+            var result = (from r in _userContext.Proyectos where r.proyectId == Id select r).FirstOrDefault();
             return result;
         }
 

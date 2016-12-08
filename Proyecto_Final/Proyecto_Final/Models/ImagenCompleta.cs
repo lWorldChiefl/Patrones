@@ -8,7 +8,7 @@ namespace Proyecto_Final.Models
 {
     public class ImagenCompleta
     {
-        public Producto Producto { get; set;}
+        public Proyecto Producto { get; set; }
         public Imagen Imagen { get; set;}
     }
 }

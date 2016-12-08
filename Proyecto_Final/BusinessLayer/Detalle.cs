@@ -11,22 +11,17 @@ namespace BusinessLayer
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class Detalle
     {
-        public Detalle()
-        {
-            this.Facturas = new HashSet<Factura>();
-        }
-
-        [Key]
         public int detailsId { get; set; }
         public Nullable<int> productId { get; set; }
         public Nullable<int> detailsQuantity { get; set; }
         public Nullable<int> detailsPrice { get; set; }
+        public Nullable<int> proyectId { get; set; }
+        public Nullable<int> userId { get; set; }
     
-        public virtual Producto Producto { get; set; }
-        public virtual ICollection<Factura> Facturas { get; set; }
+        public virtual Proyecto Proyecto { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

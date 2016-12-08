@@ -1,11 +1,11 @@
-﻿@model IEnumerable<BusinessLayer.Producto>
+﻿@model IEnumerable<BusinessLayer.Proyecto>
 
 @{
     ViewBag.Title = "Productos";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Productos</h2>
+<h2>Proyectos</h2>
 <p>@Html.ActionLink("Crear","Crear","Productos")</p>
 <table class="table table-striped table-hover">
     <tr class="info">
@@ -31,23 +31,23 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.productName)
+                @Html.DisplayFor(modelItem => item.proyectName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.productPrice)
+                @Html.DisplayFor(modelItem => item.proyectDescription)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.productStock)
+                @Html.DisplayFor(modelItem => item.proyectStock)
             </td>
             <td>
-                <img src="@Url.Content(item.productImage)" style="height:150px;width:150px;" />
+                <img src="@Url.Content(item.proyectImage)" style="height:150px;width:150px;" />
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Categoria.categoryName)
             </td>
             <td>
-                @Html.ActionLink("Editar", "Editar", new { id = item.productId }) |
-                @Html.ActionLink("Borrar", "Eliminar", new { id = item.productId })
+                @Html.ActionLink("Editar", "Editar", new { id = item.proyectId }) |
+                @Html.ActionLink("Borrar", "Eliminar", new { id = item.proyectId })
             </td>
         </tr>
     }

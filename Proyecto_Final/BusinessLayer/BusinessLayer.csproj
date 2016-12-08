@@ -48,13 +48,10 @@
     <Compile Include="Detalle.cs">
       <DependentUpon>VerocoModelo.tt</DependentUpon>
     </Compile>
-    <Compile Include="Factura.cs">
-      <DependentUpon>VerocoModelo.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Producto.cs">
-      <DependentUpon>VerocoModelo.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Proyecto.cs">
+      <DependentUpon>VerocoModelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Tipos_Usuarios.cs">
       <DependentUpon>VerocoModelo.tt</DependentUpon>
     </Compile>

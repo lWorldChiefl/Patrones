@@ -70,7 +70,7 @@ namespace Proyecto_Final.Controllers
 
         public ActionResult Usuarios()
         {
-            var usuariosAdministrador = db.Usuarios.Where(u => u.userTypeId == 3 || u.userTypeId == 2);
+            var usuariosAdministrador = db.Usuarios.Where(u => u.userTypeId == 1);
             var usuariosGerente = db.Usuarios.Where(u => u.userTypeId == 2);
             if (Session["userTypeId"].ToString() == "1") //Administrador
             {

@@ -22,6 +22,6 @@ namespace BusinessLayer
         public int userTypeId { get; set; }
         public string userTypeDescription { get; set; }
     
-        public ICollection<Usuario> Usuarios { get; set; }
+        public virtual ICollection<Usuario> Usuarios { get; set; }
     }
 }

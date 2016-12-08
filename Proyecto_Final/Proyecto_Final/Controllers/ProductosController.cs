@@ -49,6 +49,7 @@ namespace Proyecto_Final.Controllers
                 ImagenCompleta.Producto.proyectImage = "~/Content/image/" + fileName;
             }
 
+            ViewBag.tipo_Categoria = new SelectList(db.Categorias, "categoryId", "categoryName", ImagenCompleta.Producto.categoryId);
             db.Proyectos.Add(ImagenCompleta.Producto);
             db.SaveChanges();
             return RedirectToAction("Productos");

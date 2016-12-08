@@ -53,13 +53,7 @@ namespace Proyecto_Final.Controllers
 
         public ActionResult Registrarse()
         {
-            var x = db.Tipos_Usuarios.ToList().Select(c => new SelectListItem         
-                            {
-                               Text = c.userTypeDescription,
-                               Value = c.userTypeId.ToString(),
-                               Selected = (c.userTypeId == 1)
-                            }).ToList();
-            ViewBag.tipo_id = x;
+            ViewBag.userTypeId = new SelectList(db.Tipos_Usuarios, "userTypeId", "userTypeDescription", 1);
             return View();
         }
 
@@ -68,7 +62,7 @@ namespace Proyecto_Final.Controllers
         {
             userRe.Crear(user);
             ModelState.Clear();
-            ViewBag.Message = user.userName + " registrado satisfactoriamente";
+            ViewBag.userTypeId = new SelectList(db.Tipos_Usuarios, "userTypeId", "userTypeDescription", user.userTypeId);
             return View();
         }
     }

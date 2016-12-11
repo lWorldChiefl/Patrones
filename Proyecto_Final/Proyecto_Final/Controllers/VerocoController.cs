@@ -32,9 +32,7 @@ namespace Proyecto_Final.Controllers
                 var usr = db.Usuarios.Where(u => u.userName == user.userName && u.userPassword == user.userPassword).FirstOrDefault();
                 if (usr != null)
                 {
-                    Session["userId"] = usr.userId;
-                    Session["userName"] = usr.userName.ToString();
-                    Session["userTypeId"] = usr.userTypeId;
+                    Singleton(usr);
                     return RedirectToAction("Index","Account");
                 }
                 else
@@ -64,6 +62,21 @@ namespace Proyecto_Final.Controllers
             ModelState.Clear();
             ViewBag.userTypeId = new SelectList(db.Tipos_Usuarios, "userTypeId", "userTypeDescription", user.userTypeId);
             return View();
+        }
+
+        private void Singleton(Usuario user)
+        {
+            if (Session["Activa"] == null)
+            {
+                Session["Activa"] = true;
+                Session["userId"] = user.userId;
+                Session["userName"] = user.userName.ToString();
+                Session["userTypeId"] = user.userTypeId;
+            }
+            else
+            {
+                ViewBag.Error = "Error";
+            }
         }
     }
 }
